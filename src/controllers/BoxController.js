@@ -4,7 +4,11 @@ class BoxController {
     async store(req, res){
         const { title } = req.body;
 
-        const box = await Box.create({ title });
+        const box = await Box.findOne({ title });
+
+        if(box) return res.json(box);
+
+        box = await Box.create({ title });
 
         return res.json(box);
     }
