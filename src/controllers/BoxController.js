@@ -6,9 +6,10 @@ class BoxController {
 
         const box = await Box.findOne({ title });
 
-        if(box) return res.json(box);
-
-        box = await Box.create({ title });
+        if(!box){
+            const box = await Box.create({ title });
+            return res.json(box);
+        } 
 
         return res.json(box);
     }
